@@ -1,14 +1,12 @@
 package dao;
 
-import db.DBConnection;
 import model.ItemDTO;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
 public interface ItemDAO {
-    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException;
+    ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException;
 
     boolean deleteItem(String code) throws SQLException, ClassNotFoundException;
 
