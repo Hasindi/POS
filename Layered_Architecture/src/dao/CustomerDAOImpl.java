@@ -1,6 +1,5 @@
 package dao;
 
-import db.DBConnection;
 import model.CustomerDTO;
 
 import java.sql.*;
@@ -49,5 +48,4 @@ public class CustomerDAOImpl implements CustomerDAO{
             return "C00-001";
         }
     }
-
 }
