@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
@@ -74,7 +75,7 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
 
             for (CustomerDTO customer : allCustomers) {
@@ -150,7 +151,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
 
-                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+                CustomerDAO customerDAO = new CustomerDAOImpl();
                 customerDAO.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -168,7 +169,8 @@ public class ManageCustomersFormController {
                 if (!existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
-                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+
+                CustomerDAO customerDAO = new CustomerDAOImpl();
                 customerDAO.updateCustomer(new CustomerDTO(name,address,id));
 
             } catch (SQLException e) {
@@ -188,7 +190,7 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+        CustomerDAO customerDAO = new CustomerDAOImpl();
         return customerDAO.existCustomer(id);
     }
 
@@ -201,7 +203,7 @@ public class ManageCustomersFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             customerDAO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -217,7 +219,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             return customerDAO.generateNewId();
 
         } catch (SQLException e) {
