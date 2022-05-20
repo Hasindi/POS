@@ -12,24 +12,26 @@ public class CustomerDAOImpl implements CustomerDAO{
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Customer");
         ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
         while (rst.next()) {
-            getAllCustomers().add(new CustomerDTO(rst.getString(1),rst.getString(2) ,rst.getString(3) ));
+            allCustomers.add(new CustomerDTO(rst.getString(1), rst.getString(2) ,rst.getString(3) ));
         }
         return allCustomers;
     }
 
     @Override
     public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress())
+        return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",
+                dto.getId(),dto.getName(),dto.getAddress());
     }
 
     @Override
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.executeUpdate("UPDATE Customer SET name=?, address=? WHERE id=?",dto.getName(),dto.getAddress(),dto.getId());
+        return SQLUtil.executeUpdate("UPDATE Customer SET name=?, address=? WHERE id=?",
+                dto.getName(),dto.getAddress(),dto.getId());
     }
 
     @Override
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.executeUpdate("SELECT id FROM Customer WHERE id=?",id);
+        return SQLUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id).next();
     }
 
     @Override

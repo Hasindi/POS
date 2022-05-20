@@ -12,7 +12,7 @@ public class ItemDAOImpl implements ItemDAO{
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Item");
         ArrayList<ItemDTO> allItems = new ArrayList<>();
         while (rst.next()) {
-            getAllItems().add(new ItemDTO(rst.getString(1),
+            allItems.add(new ItemDTO(rst.getString(1),
                     rst.getString(2), rst.getBigDecimal(3), rst.getInt(4)));
         }
         return allItems;
@@ -32,12 +32,12 @@ public class ItemDAOImpl implements ItemDAO{
     @Override
     public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return SQLUtil.executeUpdate(")UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?",
-                dto.getDescription(), dto.getUnitPrice(), o.getQtyOnHand(), dto.getCode());
+                dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand(), dto.getCode());
     }
 
     @Override
     public boolean existItems(String code) throws SQLException, ClassNotFoundException {
-        return SQLUtil.executeUpdate("SELECT code FROM Item WHERE code=?",code);
+        return SQLUtil.executeQuery("SELECT code FROM Item WHERE code=?",code).next();
     }
 
     @Override
