@@ -54,7 +54,7 @@
             <TableColumn prefWidth="174.0" text="Description" />
             <TableColumn prefWidth="64.0" text="Qty" />
             <TableColumn prefWidth="99.0" text="Unit Price" />
-            <TableColumn prefWidth="88.0" text="Total" />
+            <TableColumn prefWidth="101.0" text="Total" />
             <TableColumn prefWidth="99.0" text="Delete" />
          </columns>
       </TableView>

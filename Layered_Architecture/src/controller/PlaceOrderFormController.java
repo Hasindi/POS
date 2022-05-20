@@ -3,10 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.CustomerDAOImpl;
-import dao.ItemDAOImpl;
-import dao.OrderDAOImpl;
+import dao.*;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -334,7 +331,7 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
-            CrudDAO<OrderDTO,String> orderDAO = new OrderDAOImpl();
+            CrudDAO<OrderDTO,String> orderDAO=new OrderDAOImpl();
             /*if order id already exist*/
             if (orderDAO.exist(orderId)) {
 
@@ -351,15 +348,13 @@ public class PlaceOrderFormController {
                 return false;
             }
 
-            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
+            CrudDAO<OrderDetailDTO,String> orderDetailDAO = new OrderDetailDAOImpl();
 
             for (OrderDetailDTO detail : orderDetails) {
-                /*stm.setString(1, orderId);
-                stm.setString(2, detail.getItemCode());
-                stm.setBigDecimal(3, detail.getUnitPrice());
-                stm.setInt(4, detail.getQty());*/
 
-                if (stm.executeUpdate() != 1) {
+                boolean save1 = orderDetailDAO.save(detail);
+
+                if (!save1) {
                     connection.rollback();
                     connection.setAutoCommit(true);
                     return false;

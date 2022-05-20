@@ -81,7 +81,7 @@ public class ManageItemsFormController {
             ArrayList<ItemDTO> allItems = itemDAO.getAll();
 
             for(ItemDTO item : allItems){
-                tblItems.getItems().add(new ItemTM(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+                tblItems.getItems().add(new ItemTM(item.getCode(), item.getDescription(),item.getUnitPrice() ,item.getQtyOnHand() ));
             }
 
         } catch (SQLException e) {

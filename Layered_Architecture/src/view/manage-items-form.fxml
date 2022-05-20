@@ -49,8 +49,8 @@
         <columns>
           <TableColumn prefWidth="97.0" text="Code" />
           <TableColumn prefWidth="204.0" text="Description" />
-            <TableColumn prefWidth="130.0" text="Qty. on Hand" />
-            <TableColumn prefWidth="163.0" text="Unit Price" />
+            <TableColumn prefWidth="136.0" text="Qty. on Hand" />
+            <TableColumn prefWidth="177.0" text="Unit Price" />
         </columns>
       </TableView>
 
