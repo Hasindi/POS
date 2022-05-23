@@ -1,7 +1,6 @@
 package dao;
 
-import db.DBConnection;
-import model.CustomerDTO;
+import dao.custom.ItemDAO;
 import model.ItemDTO;
 
 import java.sql.*;

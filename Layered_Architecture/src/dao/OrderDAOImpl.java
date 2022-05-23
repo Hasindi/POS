@@ -1,11 +1,6 @@
 package dao;
 
-import db.DBConnection;
-import model.CustomerDTO;
-import model.OrderDTO;
-
-import java.sql.*;
-import java.util.ArrayList;
+import dao.custom.OrderDAO;
 
 public class OrderDAOImpl implements OrderDAO {
 
