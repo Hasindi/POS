@@ -40,6 +40,15 @@ public class CustomDTO {
         this.qty = qty;
     }
 
+    public CustomDTO(String oid, LocalDate orderDate, String customerId, String itemCode, int qty, BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+        this.oid = oid;
+        this.itemCode = itemCode;
+        this.qty = qty;
+    }
+
     public String getId() {
         return id;
     }
