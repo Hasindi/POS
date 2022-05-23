@@ -24,22 +24,6 @@ public class CustomDTO {
     public CustomDTO() {
     }
 
-    public CustomDTO(String id, String name, String address, String code, String description, BigDecimal unitPrice, int qtyOnHand, String orderId, LocalDate orderDate, String customerId, String oid, String itemCode, int qty) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.code = code;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.qtyOnHand = qtyOnHand;
-        this.orderId = orderId;
-        this.orderDate = orderDate;
-        this.customerId = customerId;
-        this.oid = oid;
-        this.itemCode = itemCode;
-        this.qty = qty;
-    }
-
     public CustomDTO(String oid, LocalDate orderDate, String customerId, String itemCode, int qty, BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
         this.orderDate = orderDate;
