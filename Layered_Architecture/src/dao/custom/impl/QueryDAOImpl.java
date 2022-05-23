@@ -13,19 +13,12 @@ import java.util.ArrayList;
 
 public class QueryDAOImpl implements QuaryDAO {
     public ArrayList<CustomDTO> searchOrderByOrderId(String id) throws SQLException,ClassNotFoundException{
-        String sql = "SELECT Orders.sid,Orders.date,Orders.customerId,OrderDetails.itemCode,OrderDetails.qty,OrderDetails.unitPrice FROM Ordrs INNER JOIN OrderDetails IN Orders.sid=Orderdetails.sid WHERE Orders.sid=?;";
-        ResultSet rst = SQLUtil.executeQuery(sql,id);
+        ResultSet rst = SQLUtil.executeQuery("SELECT Orders.sid,Orders.date,Orders.customerId,OrderDetails.itemCode,OrderDetails.qty,OrderDetails.unitPrice FROM Ordrs INNER JOIN OrderDetails IN Orders.sid=Orderdetails.sid WHERE Orders.sid=?;",id);
         ArrayList<CustomDTO> orderRecords = new ArrayList<>();
 
         while (rst.next()) {
-            String sid = rst.getString(1);
-            String date = rst.getString(2);
-            String customerId = rst.getString(3);
-            String itemCode = rst.getString(4);
-            int qty = rst.getInt(5);
-            BigDecimal unitPrice = rst.getBigDecimal(5);
-
-            orderRecords.add(new CustomDTO(sid,LocalDate.parse(date),customerId,itemCode,qty,unitPrice);
+            orderRecords.add(new CustomDTO(rst.getString(1),LocalDate.parse(rst.getString(2)),
+                    rst.getString(3),rst.getString(4),rst.getInt(5), rst.getBigDecimal(5)));
         }
         return orderRecords;
     }
