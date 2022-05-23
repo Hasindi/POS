@@ -1,15 +1,9 @@
 package dao;
 
-import model.CustomerDTO;
-import model.OrderDetailDTO;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-public class OrderDetailDAOImpl implements CrudDAO<OrderDetailDTO,String> {
+public class OrderDetailDAOImpl implements OrderDetailDAO {
 
 
-    @Override
+   /* @Override
     public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
@@ -42,5 +36,5 @@ public class OrderDetailDAOImpl implements CrudDAO<OrderDetailDTO,String> {
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         return null;
-    }
+    }*/
 }
