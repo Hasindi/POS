@@ -1,5 +1,6 @@
 package controller;
 
+import BO.PlaceOrderbOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -324,62 +325,15 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
-        /*Transaction*/
-
-        /*try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-
-            *//*if order id already exist*//*
-            if (orderDAO.exist(orderId)) {
-
-            }
-
-            connection.setAutoCommit(false);
-
-            boolean save = orderDAO.save(new OrderDTO(orderId,orderDate,customerId));
-
-            if (!save) {
-                connection.rollback();
-                connection.setAutoCommit(true);
-                return false;
-            }
-
-            CrudDAO<OrderDetailDTO,String> orderDetailDAO = new OrderDetailDAOImpl();
-
-            for (OrderDetailDTO detail : orderDetails) {
-
-                boolean save1 = orderDetailDAO.save(detail);
-
-                if (!save1) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    return false;
-                }
-
-//                //Search & Update Item
-                ItemDTO item = findItem(detail.getItemCode());
-                item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
-
-                //Update item
-                boolean update = itemDAO.update(new ItemDTO(item.getCode(),item.getDescription(),item.getUnitPrice(),item.getQtyOnHand()));
-
-                if (!update) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    return false;
-                }
-            }
-
-            connection.commit();
-            connection.setAutoCommit(true);
-            return true;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+        try {
+            return placeOrderbO.perchesOrder(orderId,orderDate,customerId,orderDetails);
+        } catch (SQLException e) {
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return false;*/
+        return false;
     }
 
 
