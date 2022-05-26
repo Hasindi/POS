@@ -111,8 +111,8 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
 
-                        CustomerDTO search = customerDAO.search(newValue + "");
-
+                        PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+                        CustomerDTO search = placeOrderbO.searchCustomer(newValue + "");
                         txtCustomerName.setText(search.getName());
 
                     } catch (SQLException e) {
@@ -142,7 +142,9 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
 //                        throw new NotFoundException("There is no such item associated with the id " + code);
                     }
 
-                    ItemDTO item = itemDAO.search(newItemCode + "");
+
+                    PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+                    ItemDTO item = placeOrderbO.searchItem(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
                     txtUnitPrice.setText(item.getUnitPrice().setScale(2).toString());
@@ -187,16 +189,19 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        return itemDAO.exist(code);
+        PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+        return placeOrderbO.checkItemIsAveilable(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerDAO.exist(id);
+        PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+        return placeOrderbO.checkCustomerIsAveilable(id);
     }
 
     public String generateNewOrderId() {
         try {
-            return orderDAO.generateNewId();
+            PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+            return placeOrderbO.genarateNewOrderId();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
@@ -209,7 +214,8 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
     private void loadAllCustomerIds() {
         try {
             /*Get all customers*/
-            ArrayList<CustomerDTO> all = customerDAO.getAll();
+            PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+            ArrayList<CustomerDTO> all = placeOrderbO.getAllCustomers();
 
             for (CustomerDTO customerDTO : all) {
                 cmbCustomerId.getItems().add(customerDTO.getId());
@@ -225,7 +231,8 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
     private void loadAllItemCodes() {
         try {
             /*Get all items*/
-            ArrayList<ItemDTO> all = itemDAO.getAll();
+            PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+            ArrayList<ItemDTO> all = placeOrderbO.getAllItems();
 
             for (ItemDTO itemDTO : all) {
                 cmbItemCode.getItems().add(itemDTO.getCode());
@@ -339,7 +346,8 @@ public class PlaceOrderFormController<OrderDetailsDAO> {
 
     public ItemDTO findItem(String code) {
         try {
-            return itemDAO.search(code);
+            PlaceOrderbOImpl placeOrderbO = new PlaceOrderbOImpl();
+            return placeOrderbO.searchItem(code);
 
         } catch (SQLException e) {
             throw new RuntimeException("Failed to find the Item " + code, e);

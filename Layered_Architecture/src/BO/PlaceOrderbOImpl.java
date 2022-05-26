@@ -4,6 +4,7 @@ import dao.CrudDAO;
 import dao.custom.*;
 import dao.custom.impl.*;
 import db.DBConnection;
+import model.CustomerDTO;
 import model.ItemDTO;
 import model.OrderDTO;
 import model.OrderDetailDTO;
@@ -11,6 +12,7 @@ import model.OrderDetailDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderbOImpl {
@@ -72,5 +74,33 @@ public class PlaceOrderbOImpl {
 
 
         //return false;
+    }
+
+    public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
+       return customerDAO.search(id);
+    }
+
+    public ItemDTO searchItem(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.search(code);
+    }
+
+    public boolean checkItemIsAveilable(String code) throws SQLException, ClassNotFoundException {
+        return itemDAO.exist(code);
+    }
+
+    public boolean checkCustomerIsAveilable(String id) throws SQLException, ClassNotFoundException {
+        return customerDAO.exist(id);
+    }
+
+    public String genarateNewOrderId() throws SQLException, ClassNotFoundException {
+        return orderDAO.generateNewId();
+    }
+
+    public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
+        return customerDAO.getAll();
+    }
+
+    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
+        return itemDAO.getAll();
     }
 }
