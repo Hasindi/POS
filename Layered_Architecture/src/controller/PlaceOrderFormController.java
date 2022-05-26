@@ -4,13 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.*;
-import dao.custom.CustomerDAO;
-import dao.custom.ItemDAO;
-import dao.custom.OrderDAO;
-import dao.custom.impl.CustomerDAOImpl;
-import dao.custom.impl.ItemDAOImpl;
-import dao.custom.impl.OrderDAOImpl;
-import dao.custom.impl.OrderDetailDAOImpl;
+import dao.custom.*;
+import dao.custom.impl.*;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -45,7 +40,7 @@ import java.util.stream.Collectors;
  * @since : 0.1.0
  **/
 
-public class PlaceOrderFormController {
+public class PlaceOrderFormController<OrderDetailsDAO> {
 
     public AnchorPane root;
     public JFXButton btnPlaceOrder;
@@ -62,10 +57,6 @@ public class PlaceOrderFormController {
     public Label lblDate;
     public Label lblTotal;
     private String orderId;
-
-    private ItemDAO itemDAO = new ItemDAOImpl();
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
-    private OrderDAO orderDAO = new OrderDAOImpl();
 
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -335,10 +326,10 @@ public class PlaceOrderFormController {
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
         /*Transaction*/
 
-        try {
+        /*try {
             Connection connection = DBConnection.getDbConnection().getConnection();
 
-            /*if order id already exist*/
+            *//*if order id already exist*//*
             if (orderDAO.exist(orderId)) {
 
             }
@@ -388,7 +379,7 @@ public class PlaceOrderFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
+        return false;*/
     }
 
 
